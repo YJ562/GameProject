@@ -32,8 +32,6 @@ void CSignUpDlg::DoDataExchange(CDataExchange* pDX)
 	BOOL bopen = m_db.OpenEx(_T("DSN=mydb;SERVER=127.0.0.1;PORT=3306;UID=root;PWD=0804; DATABASE=gameproject;"), CDatabase::noOdbcDialog);
 	if (bopen) m_prs = new CRecordset(&m_db);
 
-
-
 	GetDlgItem(IDC_PWError)->ShowWindow(SW_HIDE);
 	GetDlgItem(IDC_IDError)->ShowWindow(SW_HIDE);
 
@@ -189,10 +187,9 @@ void  CSignUpDlg::InsertData(CString Signup_ID, CString Signup_PW, CString Signu
 }
 
 int  CSignUpDlg::CheckDuplicatedID(CString Enter_ID) {
-	CString query_str; //DB 쿼리문
-	//CString m_CompareID = _T(""); //DB에 있는 비밀번호와 비교
+	CString query_str; //DB 쿼리문	
 	CString m_Exist;
-	
+
 	query_str.Format(L"select EXIST from member where ID = \'%s\';", Enter_ID);
 
 

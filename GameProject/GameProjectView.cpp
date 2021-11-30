@@ -40,7 +40,7 @@ CGameProjectView::CGameProjectView() noexcept
 	: CFormView(IDD_GAMEPROJECT_FORM)
 {
 	// TODO: 여기에 생성 코드를 추가합니다.
-	BOOL bopen = m_db.OpenEx(_T("DSN=mydb; SERVER=127.0.0.1; PORT=3306; UID=root; PWD=0804; DATABASE=gameproject ;"), CDatabase::noOdbcDialog);
+	BOOL bopen = m_db.OpenEx(_T("DSN=mydb; SERVER=127.0.0.1; PORT=3306; UID=anni20; PWD=0804; DATABASE=gameproject ;"), CDatabase::noOdbcDialog);
 	if (bopen) m_prs = new CRecordset(&m_db);
 
 }
@@ -67,8 +67,7 @@ void CGameProjectView::OnInitialUpdate()
 	CFormView::OnInitialUpdate();
 	GetParentFrame()->RecalcLayout();
 	ResizeParentToFit();
-	GetDlgItem(IDC_FindInfo)->EnableWindow(FALSE); // 아이디/비밀번호 찾기 비활성화
-
+	//GetDlgItem(IDC_FindInfo)->EnableWindow(FALSE); // 아이디/비밀번호 찾기 비활성화
 
 	// 화면 전환
 	CRect rc;

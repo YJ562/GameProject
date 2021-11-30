@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "afxdialogex.h"
 #include <afxdb.h>
-
+#include "CSignUpDlg.h"
 
 // CFindDlg 대화 상자
 
@@ -22,4 +22,23 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
 
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedButton1();
+	//CEdit m_edit;
+	CComboBox m_Combo1;
+	CComboBox m_Combo2;
+	CComboBox m_Combo3;
+
+	CDatabase m_db; //데이터 베이스 연동
+	CRecordset* m_prs;
+	void FindAccountExisted(CString name, CString birthday, CString phone);
+	afx_msg void OnBnClickedForm();
+	afx_msg void OnBnClickedButton2();
+	
+	void ShowUpdatePW();
+	afx_msg void OnBnClickedButton3();
+
+	CString m_ID_founded;
+	virtual void OnOK();
+	void UpdatePW(CString newPW, CString m_ID_founded);
 };
