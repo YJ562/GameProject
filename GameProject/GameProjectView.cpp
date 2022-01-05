@@ -42,7 +42,7 @@ CGameProjectView::CGameProjectView() noexcept
 	// TODO: 여기에 생성 코드를 추가합니다.
 	//m_loginID_now.Format(L"");
 
-	BOOL bopen = m_db.OpenEx(_T("DSN=mydb; SERVER=127.0.0.1; PORT=3306; UID=anni20; PWD=0804; DATABASE=gameproject ;"), CDatabase::noOdbcDialog);
+	BOOL bopen = m_db.OpenEx(_T("DSN=mydb;SERVER=127.0.0.1;PORT=3306;UID=root;PWD=0804; DATABASE=gameproject;"), CDatabase::noOdbcDialog);
 	if (bopen) m_prs = new CRecordset(&m_db);
 }
 

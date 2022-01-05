@@ -229,6 +229,10 @@
     <Image Include="res\GameProject.ico" />
     <Image Include="res\GameProjectDoc.ico" />
     <Image Include="res\Toolbar.bmp" />
+    <Image Include="res\농담곰.bmp" />
+    <Image Include="res\농담곰2.bmp" />
+    <Image Include="res\농담곰2_right.bmp" />
+    <Image Include="res\농담곰_right.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

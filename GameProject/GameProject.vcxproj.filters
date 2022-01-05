@@ -110,5 +110,17 @@
     <Image Include="res\bitmap2.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="res\농담곰.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\농담곰_right.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\농담곰2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\농담곰2_right.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>

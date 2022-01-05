@@ -103,6 +103,7 @@ void CPlayFormView::OnDraw(CDC* pDC)
 		int delay;
 		delay = rand() % 10 + 1;
 
+		
 		CString str, str2;
 
 		if (level == 0)
@@ -157,6 +158,10 @@ void CPlayFormView::OnDraw(CDC* pDC)
 					k[i].y = -1 * (100 * (delay));
 					e.push_back(k[i]);
 					step_y.push_back(rand() % 2 + 4);
+					if (e[i].y - er[i] >= rect.bottom)
+						count++;
+					else if (e[i].y - er[i] >= m_winbottom)
+						return;
 				}
 			break;
 
@@ -170,6 +175,10 @@ void CPlayFormView::OnDraw(CDC* pDC)
 					k[i].y = -1 * (100 * (delay));
 					e.push_back(k[i]);
 					step_y.push_back(rand() % 2 + 4);
+					if (e[i].y - er[i] >= rect.bottom)
+						count++;
+					else if (e[i].y - er[i] >= m_winbottom)
+						return;
 				}
 			break;
 
@@ -183,6 +192,10 @@ void CPlayFormView::OnDraw(CDC* pDC)
 					k[i].y = -1 * (100 * (delay));
 					e.push_back(k[i]);
 					step_y.push_back(rand() % 2 + 4);
+					if (e[i].y - er[i] >= rect.bottom)
+						count++;
+					else if (e[i].y - er[i] >= m_winbottom)
+						return;
 				}
 			break;
 		}
@@ -200,24 +213,21 @@ void CPlayFormView::OnDraw(CDC* pDC)
 		
 		/*--------사람 비트맵-------------------------------------------------------------------*/
 		CDC memDC;
+		CBitmap bmp, * ob;
 		memDC.CreateCompatibleDC(pDC);
-
-		CBitmap bmp;
 		bmp.LoadBitmap(IDB_BITMAP1);
-
-		CBitmap* pOldBmp = NULL;
-		pOldBmp = memDC.SelectObject(&bmp);
-
+		ob = memDC.SelectObject(&bmp);
 		BITMAP bmpInfo;
 		bmp.GetBitmap(&bmpInfo);
-
 		pDC->TransparentBlt(x + m_winright, y + m_winbottom, bmpInfo.bmWidth, bmpInfo.bmHeight, &memDC, 0, 0, bmpInfo.bmWidth, bmpInfo.bmHeight, RGB(255, 255, 255));
 
-		memDC.SelectObject(pOldBmp);
-		memDC.DeleteDC();
+		memDC.SelectObject(ob);
 		bmp.DeleteObject();
-
+		memDC.DeleteDC();
+		
+	
 		/*--------사각형-------------------------------------------------------------------*/
+		/*
 		CBrush bs1, * pbs1;
 		CPen pen, * oldpen;
 		// test_brush(RGB(0, 0, 0));
@@ -232,12 +242,52 @@ void CPlayFormView::OnDraw(CDC* pDC)
 		dc.SelectObject(pbs1);
 		dc.SelectObject(oldpen);
 		pen.DeleteObject();
+		*/
+		/*
+		CDC memDc;
+		CBitmap *pbmP, oldb;
 
+		memDc.CreateCompatibleDC(&dc);
+		oldb.CreateCompatibleBitmap(&dc, m_winright+35, m_winbottom+50);
+		pbmP = memDc.SelectObject(&oldb);
+
+		CBrush bs1(NULL_BRUSH);
+		memDc.SelectObject(&bs1);
+		memDc.Rectangle(m_winright + 10, m_winbottom, m_winright + 35, m_winbottom + 50);
+
+		CPen pen(PS_NULL, 0, RGB(255, 255, 255));
+		memDc.SelectObject(&pen);
+		CBrush bs2(NULL_BRUSH);
+		memDc.SelectObject(&bs2);
+		memdc.Rectangle(x + m_winright + 10, y + m_winbottom, x + m_winright + 35, y + m_winbottom + 50);
+		*/
+		/*
+		bs1.CreateStockObject(NULL_BRUSH); //투명 사각형
+		pen.CreatePen(PS_NULL, 0, RGB(255, 255, 255)); //선
+		pbs1 = dc.SelectObject(&bs1);
+		//pbs1 = dc.SelectObject(&test_brush);
+
+		oldpen = dc.SelectObject(&pen);
+		dc.Rectangle(x + m_winright + 10, y + m_winbottom, x + m_winright + 35, y + m_winbottom + 50);
+		dc.SelectObject(pbs1);
+		dc.SelectObject(oldpen);
+		pen.DeleteObject();
+		*/
+		/*
 		if (x + m_winright > m_winright && x > m_winright)
 			x = x * -1;
 		else if (x + m_winright < m_winright && x < -m_winright)
 			x = x * -1;
-
+		*/
+		if (x + m_winright > m_winright && x > m_winright) {
+			x = x * -1;
+			return;
+		}
+		if (x + m_winright < m_winright && x < -m_winright) {
+			x = x * -1;
+			return;
+		}
+		
 		int dx, dy;
 		double compile;
 		for (int i = 0; i < e.size(); i++)
@@ -294,21 +344,6 @@ void CPlayFormView::OnDraw(CDC* pDC)
 }
 
 
-
-/*
-void CPlayFormView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
-{
-	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	if (nChar == VK_RIGHT)
-		x += step;
-	if (nChar == VK_LEFT)
-		x -= step;
-
-	Invalidate();
-
-	CFormView::OnKeyDown(nChar, nRepCnt, nFlags);
-}
-*/
 
 BOOL CPlayFormView::OnEraseBkgnd(CDC* pDC)
 {
@@ -376,6 +411,7 @@ void CPlayFormView::OnmyEasy()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	KillTimer(0);
+	count = 0;
 	level = 0;
 	e.clear();
 	er.clear();
@@ -390,6 +426,7 @@ void CPlayFormView::OnmyNormal()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	KillTimer(0);
+	count = 0;
 	level = 1;
 	e.clear();
 	er.clear();
@@ -406,6 +443,7 @@ void CPlayFormView::OnmyHard()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	KillTimer(0);
+	count = 0;
 	level = 2;
 	e.clear();
 	er.clear();
@@ -422,6 +460,7 @@ void CPlayFormView::OnmyHell()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	KillTimer(0);
+	count = 0;
 	level = 3;
 	e.clear();
 	er.clear();

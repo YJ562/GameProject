@@ -34,6 +34,10 @@ public:
 	CListCtrl m_list2;
 	CComboBox m_selectLevel;
 	void selectQuery(int level);
-	
+	void showMyRecord1();
+	void showMyRecord2();
 	int m_selectList=0;
+	CDateTimeCtrl m_start;
+	CDateTimeCtrl m_end;
+	CString st, ed;
 };
